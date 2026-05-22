@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Boat instructions</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      min-height: 100vh;
+      background: #f9f9f9;
+      color: #222;
+    }
+
+    /* --- SIDEBAR --- */
+    .sidebar {
+      width: 200px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 2rem 1rem;
+      background: #fff;
+      border-right: 1px solid #ddd;
+    }
+
+    .sidebar h3 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #999;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #185FA5;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .sidebar a:hover {
+      background: #f0f0f0;
+    }
+
+    .sidebar a.active {
+      background: #E6F1FB;
+      border-color: #B5D4F4;
+      color: #0C447C;
+      font-weight: bold;
+    }
+
+    /* --- MAIN CONTENT --- */
+    .content {
+      flex: 1;
+      padding: 3rem 4rem;
+      max-width: 860px;
+    }
+
+    .step-section {
+      margin-bottom: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .step-section:last-child {
+      border-bottom: none;
+    }
+
+    .step-label {
+      font-size: 12px;
+      color: #185FA5;
+      font-weight: bold;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .step-section h2 {
+      font-size: 22px;
+      margin-bottom: 1rem;
+      color: #111;
+    }
+
+    .step-section p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3>Intro</h3>
+ <a href="../index.html">Terug</a>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+  <div class="step-section" id="top">
+  <h1 style="font-size: 32px; color: #111; margin-bottom: 0.5rem;">Introduction</h1>
+  <p style="font-size: 16px; color: #666;">Introduction to the topic</p>
+</div>
+
+  <div class="step-section" id="step-9">
+  <h2>Text</h2>
+  <p class="step-label">Text</p>
+  <p> Text</p>
+  </div>
+
+  </main>
+
+<script>
+  const links = document.querySelectorAll('#nav a');
+  const allSections = document.querySelectorAll('.step-section');
+
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    let current = 'top';
+    allSections.forEach(sec => {
+      if (sec.getBoundingClientRect().top <= 100) current = sec.id;
+    });
+    links.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+
+</body>
+</html>
